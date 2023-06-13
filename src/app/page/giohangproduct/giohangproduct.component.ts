@@ -56,5 +56,8 @@ export class GiohangproductComponent implements OnInit
       sessionStorage.clear()
       _this.carts = []
     }
+    // return totalPrice;
+    return totalPrice;
+
   }
 }
