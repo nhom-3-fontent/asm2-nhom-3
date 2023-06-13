@@ -25,6 +25,7 @@ export class GiohangproductComponent implements OnInit
     {
       totalPrice += item.quantity * item.price;
     }
+    // return totalPrice;
     return totalPrice;
   }
 
