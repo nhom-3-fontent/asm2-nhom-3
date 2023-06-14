@@ -19,6 +19,11 @@ export class UserService
   login ( credentials: Login ): Observable<LoginResponse>
   {
     return this.http.post<LoginResponse>( `${ this.apiUrl }/signin`, credentials );
+  login(credentials: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/signin`, credentials);
+  login ( credentials: any ): Observable<any>
+  {
+    return this.http.post<any>( `${ this.apiUrl }/signin`, credentials );
 
   }
   getUser ( id: number ): Observable<User>
@@ -40,6 +45,14 @@ export class UserService
     const url = `${ this.apiUrl }/users/${ body.id }`;
     return this.http.put<User>( url, body );
   }
+  editUser(body: User): Observable<User> {
+    const url = `${this.apiUrl}/users/${body.id}`;
+    return this.http.put<User>(url, body);
+  }
+  isAuthenticated() {
+    return JSON.parse(localStorage.getItem("user")!) || null
+  }
+  getUsername(): string {
   isAuthenticated ()
   {
     return JSON.parse( localStorage.getItem( "user" )! ) || null

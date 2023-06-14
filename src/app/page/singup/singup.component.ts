@@ -4,26 +4,28 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/interface/user';
 import { UserService } from 'src/app/seviceuser/user.service';
 
-@Component( {
+@Component({
   selector: 'app-singup',
   templateUrl: './singup.component.html',
-  styleUrls: [ './singup.component.scss' ]
-} )
-export class SingupComponent
-{
+  styleUrls: ['./singup.component.scss']
+})
+export class SingupComponent {
   users!: User
   singupForm: FormGroup
-  constructor ( private fb: FormBuilder, private router: Router, private productService: UserService )
-  {
-    this.singupForm = this.fb.group( {
-      email: [ "", [ Validators.required, Validators.email ] ],
-      name: [ "", [ Validators.required, Validators.pattern( "[a-zA-Z]+$" ) ] ],
-      password: [ "", [ Validators.required, Validators.minLength( 5 ) ] ],
-      confirmPassword: [ "", [ Validators.required, Validators.minLength( 5 ) ] ],
+  constructor(private fb: FormBuilder, private router: Router, private productService: UserService) {
+    this.singupForm = this.fb.group({
+      email: ["", [Validators.required, Validators.email]],
+      name: ["", [Validators.required, Validators.pattern("[a-zA-Z]+$")]],
+      password: ["", [Validators.required, Validators.minLength(5)]],
+      confirmPassword: ["", [Validators.required, Validators.minLength(5)]],
 
-    }, { Validators: this.checkpassword } );
+    }, { Validators: this.checkpassword });
   }
 
+  checkpassword(form: FormGroup) {
+    const password = form.get("password")?.value;
+    const confirmPassword = form.get("confirmPassword")?.value
+    if (password === confirmPassword) return null;
   checkpassword ( form: FormGroup )
   {
     const password = form.get( "password" )?.value;
@@ -33,9 +35,8 @@ export class SingupComponent
     return { notMatch: true }
   }
 
-  singupUser (): void
-  {
-    console.warn( this.singupForm.value );
+  singupUser(): void {
+    console.warn(this.singupForm.value);
     const user: User = {
       role: this.singupForm.value.role || "",
 
@@ -45,6 +46,11 @@ export class SingupComponent
       confirmPassword: this.singupForm.value.confirmPassword || ""
     };
 
+    this.productService.singup(user).subscribe((result) => {
+      console.log(result);
+      this.router.navigateByUrl("/signin")
+
+    })
     this.productService.singup( user ).subscribe( ( result ) =>
     {
       console.log( result );
@@ -53,21 +59,17 @@ export class SingupComponent
     } )
 
   }
-  get name ()
-  {
-    return this.singupForm.get( "name" )
+  get name() {
+    return this.singupForm.get("name")
   }
-  get password ()
-  {
-    return this.singupForm.get( "password" )
+  get password() {
+    return this.singupForm.get("password")
   }
 
-  get email ()
-  {
-    return this.singupForm.get( "email" )
+  get email() {
+    return this.singupForm.get("email")
   }
-  get confirmPassword ()
-  {
-    return this.singupForm.get( "confirmPassword" )
+  get confirmPassword() {
+    return this.singupForm.get("confirmPassword")
   }
 }
