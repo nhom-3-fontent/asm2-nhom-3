@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/interface/user';
 import { UserService } from 'src/app/seviceuser/user.service';
+import { tap } from 'rxjs/operators';
 
 @Component( {
   selector: 'app-base-layout',
@@ -30,13 +31,17 @@ export class BaseLayoutComponent implements OnInit
       this.route.params.subscribe( params =>
       {
         this.userId = Number( params[ 'id' ] ); // Chuyển đổi kiểu dữ liệu của userId từ string sang number
-        this.userService.getUser( this.userId ).subscribe(
-          ( user: User ) =>
+        this.userService.getUser( this.userId ).pipe(
+          tap( ( user: User ) =>
           {
             if ( user )
             {
-              this.name = this.name; // Gán giá trị `name` từ thông tin người dùng
+              this.name = user.name; // Gán giá trị `name` từ thông tin người dùng
             }
+          } )
+        ).subscribe(
+          ( user: User ) =>
+          {
           },
           ( error: any ) =>
           {

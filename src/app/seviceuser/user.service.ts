@@ -16,6 +16,9 @@ export class UserService
   {
     return this.http.post<User>( "http://localhost:3000/signup", body );
   }
+  login ( credentials: Login ): Observable<LoginResponse>
+  {
+    return this.http.post<LoginResponse>( `${ this.apiUrl }/signin`, credentials );
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/signin`, credentials);
   login ( credentials: any ): Observable<any>

@@ -1,14 +1,16 @@
-export interface User {
+export interface User
+{
     id?: number,
     name: string;
     email: string;
-    password: string;
-    confirmPassword: string
+    password?: string;
+    confirmPassword?: string
     role?: string | number;
 
 
 }
-export interface Login {
+export interface Login
+{
 
     id?: number,
 
@@ -17,7 +19,8 @@ export interface Login {
 
 
 }
-export interface LoginResponse {
+export interface LoginResponse
+{
     accessToken: string;
     user: User
 }
