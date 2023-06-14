@@ -9,14 +9,6 @@
       "id": 13
     },
     {
-      "email": "admin@gmail.com",
-      "password": "$2a$10$jg49r4HG5VGW5pMwTpqNYeOAZkqpzE3vY9tvlrLBbJy6FwJYCg.M.",
-      "role": "admin",
-      "name": "giang",
-      "confirmPassword": "123456",
-      "id": 14
-    },
-    {
       "email": "admin1@gmail.com",
       "password": "$2a$10$0.A3ZZnQiT8e5ZIZAa9m5eNqKswKuDqZCMvhUP/ryeVlGhvcYPHBG",
       "role": "",

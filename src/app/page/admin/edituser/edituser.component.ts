@@ -11,7 +11,11 @@ import { UserService } from 'src/app/seviceuser/user.service';
 export class EdituserComponent
 {
 
-  user!: User
+  user: User = {
+    name: "",
+    email: "",
+    role: ""
+  }
 
 
   constructor ( private router: ActivatedRoute, private route: Router, private userSevice: UserService
